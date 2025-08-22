@@ -1,4 +1,0 @@
-C:/Users/zakar/Desktop/sample-gm/cmake_build_test/CMakeFiles/Account_Database.dir
-C:/Users/zakar/Desktop/sample-gm/cmake_build_test/CMakeFiles/SampleGDK.dir
-C:/Users/zakar/Desktop/sample-gm/cmake_build_test/CMakeFiles/edit_cache.dir
-C:/Users/zakar/Desktop/sample-gm/cmake_build_test/CMakeFiles/rebuild_cache.dir

@@ -28,7 +28,7 @@ ifeq ($(config),debug32)
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -Wall -g -m32
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -shared -m32 -static-libgcc -static-libstdc++ -L/usr/lib32 -Wl,--kill-at -Llib
+  LDFLAGS   += -shared -m32 -g -O0 -static-libgcc -static-libstdc++ -L/usr/lib32 -Wl,--kill-at -Llib
   LIBS      += -lsampgdk -llfileini32
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += lib/libsampgdk.a
@@ -66,6 +66,8 @@ endif
 OBJECTS := \
 	$(OBJDIR)/sample.o \
 	$(OBJDIR)/Account_Database.o \
+	$(OBJDIR)/Account_Registeration_Dialogs.o \
+	$(OBJDIR)/Account_Registeration_System.o \
 
 RESOURCES := \
 
@@ -125,6 +127,7 @@ $(GCH): $(PCH)
 	-$(SILENT) cp $< $(OBJDIR)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 endif
+# ----
 
 $(OBJDIR)/sample.o: src/sample.cpp
 	@echo $(notdir $<)
@@ -134,4 +137,14 @@ $(OBJDIR)/Account_Database.o: src/Account/Database.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
+$(OBJDIR)/Account_Registeration_Dialogs.o: src/Account/Registeration_Dialogs.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/Account_Registeration_System.o: src/Account/Registeration_System.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+
+# ---
 -include $(OBJECTS:%.o=%.d)

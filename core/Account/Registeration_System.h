@@ -3,6 +3,7 @@
 
 #include "Data.h"
 #include "../../include/lfile-ini/iem-ini.h"
+#include "../../include/mini/ini.h"
 #include "../../include/sampgdk/samp.h"
 #include "../../include/sampgdk/players.h"
 
