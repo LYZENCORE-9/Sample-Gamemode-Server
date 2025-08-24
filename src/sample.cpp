@@ -14,6 +14,10 @@
 #include "../core/Account/Registeration_System.h"
 #include "../core/Account/Registeration_Dialogs.h"
 
+#include "../core/Character/Character_Registeration_System.h"
+#include "../core/Character/Character_Registeration_Dialogs.h"
+
+
 typedef void (*logprintf_t)(const char *format, ...);
 static logprintf_t logprintf;
 
@@ -58,7 +62,8 @@ bool HelloWorld::OnPlayerConnect(int playerid) {
 
 bool HelloWorld::OnPlayerDisconnect(int playerid, int reason)
 {
-	memset(&Account::Player_Database[playerid], 0, sizeof(Account::Player_Database[playerid]));
+	Account::Player_Database[playerid].reset();
+	Character::Player_Characters[playerid].reset();
 	return true;
 }
 
@@ -97,6 +102,7 @@ bool HelloWorld::OnGameModeExit() {
 bool HelloWorld::OnDialogResponse(int playerid, int dialogid, bool response, int listitem, const std::string &inputtext)
 {
 	Account::Registeration::Dialogs::Response(playerid, dialogid, response, listitem, inputtext);
+	Character::Registeration::Dialogs::Response(playerid, dialogid, response, listitem, inputtext);
 	return true;
 }
 
@@ -106,6 +112,7 @@ PLUGIN_EXPORT unsigned int PLUGIN_CALL Supports() {
 
 PLUGIN_EXPORT bool PLUGIN_CALL Load(void **ppPluginData) {
 	logprintf = (logprintf_t)ppPluginData[PLUGIN_DATA_LOGPRINTF];
+	logprintf("Sample-GameMode Internal Core Has Been Launched !");
 	// Initialize the wrapper - this always should be done here.
 	Wrapper::Initialize(ppPluginData);
 	// Do not call any natives here - they are not yet prepared for use at this stage.
@@ -113,6 +120,7 @@ PLUGIN_EXPORT bool PLUGIN_CALL Load(void **ppPluginData) {
 }
 
 PLUGIN_EXPORT void PLUGIN_CALL Unload() {
+	logprintf("Sample-GameMode Internal Core Has Been Stopped !");
 	return;
 }
 

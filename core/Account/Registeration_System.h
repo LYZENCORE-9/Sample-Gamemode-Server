@@ -2,6 +2,7 @@
 #define _PROJECT_SAMPLE_GM_ACCOUNT_REGISTERATION_SYSTEM_H_
 
 #include "Data.h"
+#include "../Character/Data.h"
 #include "../../include/lfile-ini/iem-ini.h"
 #include "../../include/mini/ini.h"
 #include "../../include/sampgdk/samp.h"

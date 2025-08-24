@@ -1,3 +1,4 @@
+#include "../../core/Character/Character_Registeration_Dialogs.h"
 #include "../../core/Account/Registeration_System.h"
 #include <cassert>
 #include <cstdio>
@@ -10,10 +11,12 @@ using namespace FileEngine;
 bool Registeration::System::Register(int playerid, Data &data)
 {
 	char user_name[25] = {0};
-	sampgdk::GetPlayerName(playerid, user_name, sizeof(user_name));
-	sprintf(data.filename, "[%d]-(%s).ini", data.id, user_name);
+	char character_filename_keys[64] = {0};
 
-	 sampgdk::SendClientMessage(playerid, -1, "Register Declared !");
+	sampgdk::GetPlayerName(playerid, user_name, sizeof(user_name));
+	snprintf(data.filename, sizeof(data.filename), "[%d]-(%s).ini", data.id, user_name);
+
+	sampgdk::SendClientMessage(playerid, -1, "Register Declared !");
 
 	FILE *handle = fopen(data.filename, "r");
 	
@@ -31,11 +34,19 @@ bool Registeration::System::Register(int playerid, Data &data)
         ini["Main Account"]["Age"] = std::to_string(data.age);        // Convert to string
         ini["Main Account"]["Gender"] = std::to_string(data.gender);  // Convert to string
         ini["Main Account"]["Registired"] = data.is_regesitired ? "1" : "0";  // Convert to string
+
+        for(int i = 0; i < Character::MAX_CHARACTER_ACCOUNTS; i++)
+        {
+        	snprintf(character_filename_keys, sizeof(character_filename_keys), "Character-%d", i);
+        	ini["Character Accounts"][character_filename_keys] = std::string("empty");
+
+        }
         
          sampgdk::SendClientMessage(playerid, -1, "IF Registration Declared");
         if(file.write(ini))
         {
             sampgdk::SendClientMessage(playerid, -1, "Registration successful!");
+            Character::Registeration::Dialogs::OpenMainPannel(playerid);
             return true;
         }
         else
@@ -91,6 +102,7 @@ bool Registeration::System::Login(int playerid, Data &data)
 			data.gender = std::stoi(ini["Main Account"]["Gender"], &idx, 10);
 			data.is_regesitired = std::stoi(ini["Main Account"]["Registired"], &idx, 10);
 			sampgdk::SendClientMessage(playerid, -1, "{00FF00} Logged In !");
+			Character::Registeration::Dialogs::OpenMainPannel(playerid);
 			return true;
 		}
 		else

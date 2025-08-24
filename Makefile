@@ -68,6 +68,8 @@ OBJECTS := \
 	$(OBJDIR)/Account_Database.o \
 	$(OBJDIR)/Account_Registeration_Dialogs.o \
 	$(OBJDIR)/Account_Registeration_System.o \
+  $(OBJDIR)/Character_Registeration_System.o \
+  $(OBJDIR)/Character_Registeration_Dialogs.o \
 
 RESOURCES := \
 
@@ -145,6 +147,13 @@ $(OBJDIR)/Account_Registeration_System.o: src/Account/Registeration_System.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
+$(OBJDIR)/Character_Registeration_Dialogs.o: src/Character/Character_Registeration_Dialogs.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/Character_Registeration_System.o: src/Character/Character_Registeration_System.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 # ---
 -include $(OBJECTS:%.o=%.d)
