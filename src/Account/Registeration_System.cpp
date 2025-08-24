@@ -14,7 +14,7 @@ bool Registeration::System::Register(int playerid, Data &data)
 	char character_filename_keys[64] = {0};
 
 	sampgdk::GetPlayerName(playerid, user_name, sizeof(user_name));
-	snprintf(data.filename, sizeof(data.filename), "[%d]-(%s).ini", data.id, user_name);
+	snprintf(data.filename, sizeof(data.filename), "Player-Database/[%d]-(%s).ini", data.id, user_name);
 
 	sampgdk::SendClientMessage(playerid, -1, "Register Declared !");
 
@@ -79,7 +79,7 @@ bool Registeration::System::Login(int playerid, Data &data)
 	char password_check[128] = {0};
 	sampgdk::GetPlayerName(playerid, user_name, sizeof(user_name));
 
-	sprintf(data.filename, "[%d]-(%s).ini", data.id, user_name);
+	sprintf(data.filename, "Player-Database/[%d]-(%s).ini", data.id, user_name);
 	
 	FILE *handle = fopen(data.filename, "r");
 	size_t idx = 0;

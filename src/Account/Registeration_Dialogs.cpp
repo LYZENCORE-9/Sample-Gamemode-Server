@@ -13,7 +13,7 @@ void Registeration::Dialogs::Check(int playerid)
 	bool is_regesitired_temp = false;
 
 	sampgdk::GetPlayerName(playerid, user_name, sizeof(user_name));
-	sprintf(filename, "[0]-(%s).ini", user_name);
+	sprintf(filename, "Player-Database/[0]-(%s).ini", user_name);
 
 	FILE* file_handle = fopen(filename, "r");
 	size_t idx = 0;

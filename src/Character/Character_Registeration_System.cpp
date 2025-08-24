@@ -5,7 +5,7 @@ using namespace Character;
 
 bool Registeration::System::Register(int playerid, Character::Data data)
 {
-	snprintf(data.filename, sizeof(data.filename), "Character-%s.ini", data.name);
+	snprintf(data.filename, sizeof(data.filename), "Character-Database/Character-%s.ini", data.name);
 
 	FILE* handle = fopen(data.filename, "r");
 	if(handle != NULL)
@@ -68,7 +68,7 @@ bool Registeration::System::Register(int playerid, Character::Data data)
 
 bool Registeration::System::Login(int playerid, Character::Data data)
 {
-	snprintf(data.filename, sizeof(data.filename), "Character-%s.ini", data.name);
+	snprintf(data.filename, sizeof(data.filename), "Character-Database/Character-%s.ini", data.name);
 
 	size_t idx = 0;
 
